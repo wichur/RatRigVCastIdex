@@ -1,1 +1,0 @@
-Pull requests to this section should sort the macro type into the appropriate point in the directory tree, or suggest a new sub directory.

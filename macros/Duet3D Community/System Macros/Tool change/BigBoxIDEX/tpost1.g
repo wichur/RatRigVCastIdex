@@ -1,1 +1,0 @@
-M116 P1           ; wait for tool 0 heaters to reach operating temperature
