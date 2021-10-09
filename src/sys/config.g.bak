@@ -20,17 +20,16 @@
 	; Mappings
 		; MCU is 0.A
 		; Toolboards are AA.B
-		M569 P0.0 D3 S0 V1000                                	; physical drive 0.0 goes backwards X
-		M569 P0.1 D3 S0 V1000                               	; physical drive 0.1 goes backwards U
-		M569 P0.2 D3 S0 V1000                                	; physical drive 0.2 goes backwards Y
-		M569 P0.3 D3 S1 V1000                               	; physical drive 0.3 goes forwards ZLeft
-		M569 P0.4 D3 S1 V1000                                	; physical drive 0.4 goes forwards ZRight
-		M569 P20.0 D3 S1 V1000                                	; physical drive 20.0 goes forwards
+		M569 P0.0 S0                               	; physical drive 0.0 goes backwards X
+		M569 P0.1 S0                              	; physical drive 0.1 goes backwards U
+		M569 P0.2 S0                               	; physical drive 0.2 goes backwards Y
+		M569 P0.3 S1                               	; physical drive 0.3 goes forwards ZLeft
+		M569 P0.4 S1                                	; physical drive 0.4 goes forwards ZRight
+		M569 P20.0 S1                               	; physical drive 20.0 goes forwards
 		M569 P21.0 S1                              	; physical drive 21.0 goes forwards
 		M584 X0.0 U0.1 Y0.2 Z0.3:0.4 E20.0:21.0         ; set drive mapping		
 	; Currents
 		M906 X2125 U2125 Y2000 Z1600:1600 E350:350 I50  ; set motor currents (mA) and motor idle factor in per cent (50-80% of rated current)	
-		;M906 X1600 U1600 Y1600 Z1600:1600 E350:350 I50
 		M84 X0 U3 Y1 S30                                ; Set idle timeout
 		; TODO: Review M84 for validity
 	; Steps
@@ -118,30 +117,17 @@
 
 ; Tool (T2)
   M563 P2 D0:1 H1:2 X0:3 F0:2 S"TOOL_COPY" ; tool 2 uses both extruders and hot end heaters, maps X to both X and U, and uses both print cooling fans
-  G10 P2 X0 Y0 U-125 S0 R0    ; set tool offsets and temperatures for tool 2
+  G10 P2 X0 Y0 U-145 S0 R0    ; set tool offsets and temperatures for tool 2
   M567 P2 E1:1               ; set mix ratio 100% on both extruders  
 
-; ''' Create a tool that prints 2 copies of the object using both carriages'''
-;M563 P2 D0:1 H1:2 X0:3 F0:2 S"copy" ; tool 2 uses both extruders, hot end heaters and fans, and maps X to both X and U
-;G10 P2 X50 Y0 U-50 S0 R0 ; set tool offsets and temperatures G10 P2 X115 Y0 U-80 S0 R0///G10 P2 X100 Y0 U-100 S0 R0
-;M567 P2 E1:1 ; set mix ratio 100% on both extruders
-
-; Sensors
+; Sensors	
 	M308 S20 Y"mcu-temp" A"CPU" 							; CPU temp sensor
-	;M308 S21 Y"drivers" A"Duet_drv" 						; drivers temp sensor
-	;M308 S4 Y"drivers" A"TMC Drivers"						; define Sensor4 as the TMC overheat sensor
+	M912 P0 S-6												; Calibrate MCU temperature
 
 ; Custom Settings
-	;M404 N1.75											    ; FILAMENT DIAMETER for print monitor
-	;M593 P"daa" F58.8                                      ; CANCEL RINGING at 76.5Hz / F58.80 
-	;M376 H2                                                ; Stop using autolevelling data after 2mm
-	;M572 D0 S0.01                                          ; set PRESSURE ADVANCE for Orbiter 1.5
 	; TODO: Ringing
 	; TODO: Pressure Advance
 	; TODO: Autolevelling Adjustment
                  
 ; Miscellaneous
-M912 P0 S-6
-M575 P1 S1 B57600											; Enable Panel Due
-;T2															; Activate T0 by default
-M501                                        				; Load saved parameters from non-volatile memory
+	M703													; Load filament settings
