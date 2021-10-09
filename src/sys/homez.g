@@ -15,7 +15,6 @@ if state.currentTool != 0
 ;    G1 U400 F6000													; Make sure U is parked
 
 ; Home Z using the Z-Probe
-M290 R0 S0															; Reset baby-stepping to 0
 G91																	; Relative positioning
 G1 Z10 F6000 H2														; Lift Z relative to current position
 G90																	; Absolute positioning

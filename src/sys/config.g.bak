@@ -120,6 +120,10 @@
   G10 P2 X0 Y0 U-145 S0 R0    ; set tool offsets and temperatures for tool 2
   M567 P2 E1:1               ; set mix ratio 100% on both extruders  
 
+; Leds			
+	M950 F4 C"out1"											; map out1 as top leds
+	M106 P4 B3 C"LEDs"										; create fan named LEDs and lit for B secs
+
 ; Sensors	
 	M308 S20 Y"mcu-temp" A"CPU" 							; CPU temp sensor
 	M912 P0 S-6												; Calibrate MCU temperature

@@ -82,7 +82,7 @@
 	; Z-Probe
 		M950 S0 C"20.io0.out"                           	; create servo pin 0 for BLTouch
 		M558 P9 C"^20.io0.in" H5 F240 T24000 A5         	; set Z probe type to bltouch and the dive height + speeds
-		G31 P500 X-26.3 Y-19.3 Z2.2           			; set Z probe trigger value, offset and trigger height 2.628
+		G31 P500 X-26.3 Y-19.3 Z2.3           			; set Z probe trigger value, offset and trigger height 2.628
 		M557 X-156.3:90 Y-134.3:120 P4       			; define mesh grid (2 4pt, 8 64 pt) 310x310mm
 		G29 S1 												; read height map
 		; TODO: Extend mesh grid to be closer to printabel area corner
